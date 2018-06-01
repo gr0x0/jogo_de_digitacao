@@ -4,12 +4,14 @@
 
 var tempoInicial = $("#tempo-digitacao").text(); // Pegando o valor do timer.
 var campo = $(".campo-digitacao"); // Pegando o textfield.
+var frase = $(".frase").text(); // Pegando a frase a ser digitada.
 
 $(function() // Importante fazer isso, declarando as funções para que funcionem bem.
 {
     atualizaTamanhoFrase();
     inicializaContadores();
     inicializaCronometro();
+    inicializaMarcadores();
     /* Os eventos de click, blur(evento de sair de um campo), dblclick (clique duplo), por serem tão comuns, têm funções próprias
     no jQuery. Elas evitam que precisemos usar a função on(), permitindo que invoquemos diretamente seus métodos. */
     $("#botao-reiniciar").click(reiniciaJogo);
@@ -69,5 +71,26 @@ function reiniciaJogo(){
     $("#contador-caracteres").text("0"); // Zerando o contador de letras.
     $("#tempo-digitacao").text(tempoInicial); // Reiniciando o timer.
     inicializaCronometro();
+
     campo.toggleClass("campo-desativado"); // Pinta o fundo da textarea de branco via classe do CSS.
+    campo.removeClass("campo-errado"); // Pinta borda de preto.
+    campo.removeClass("campo-correto"); // Pinta borda de preto.
+}
+
+function inicializaMarcadores() {
+    campo.on("input", function() {
+      console.log("Entrei");
+        var digitado = campo.val(); // O que já foi digitado.
+        var comparavel = frase.substr(0 , digitado.length); // O pedaço de frase-resposta equivalente ao tamnho do que foi digitado.
+
+        if(digitado == comparavel) {
+          console.log("Entrei no if");
+            campo.addClass("campo-correto"); // Se estiver tudo correto até aí, pinta a borda do textfield de verde.
+            campo.removeClass("campo-errado");
+        } else {
+          console.log("Entrei no else");
+            campo.addClass("campo-errado"); // Se houver erro, pinta a borda do textfield de vermelho.
+            campo.removeClass("campo-correto");
+        }
+    });
 }

@@ -19,3 +19,11 @@ icones{
 .icones{
     vertical-align: middle;
 }
+
+.campo-correto{
+    border: 3px solid green;
+}
+
+.campo-errado{
+    border: 3px solid red;
+}
