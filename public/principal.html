@@ -3,27 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Estudando jQuery</title>
+    <link rel="stylesheet" href="css/libs/materialize.min.css"> <!-- Importando o framework CSS materialize. -->
+    <link rel="stylesheet" href="css/estilos.css"> <!-- Importando o arquivo CSS criado para a página. -->
+    <link rel="stylesheet" href="css/libs/google-fonts.css"> <!-- Importando fonte de ícones CSS. -->
 </head>
 <body>
-  <h1>Jogo de Digitação</h1>
-  <p class="frase">Lorem ipsum dolor sit am  et, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  <div class="container">
+    <h1 class="center">Jogo de Digitação</h1>
+    <p class="frase center">Lorem ipsum dolor sit am  et, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
-  <!-- Informações retornadas a partir do texto. -->
-  <ul class="informacoes">
-      <li><span id ="tamanho-frase">19</span> palavras</li> <!-- Aqui entra o tamanho da frase. -->
-      <li><span id ="tempo-digitacao">10</span> segundos</li> <!-- Aqui entra o timer descrescente. -->
-  </ul>
+    <!-- Informações retornadas a partir do texto. -->
+    <ul class="informacoes">
+        <li>
+          <i class="small material-icons icones">description</i> <!-- Estilização com Materialize. -->
+          <span id ="tamanho-frase">19</span> palavras <!-- Aqui entra o tamanho da frase. -->
+        </li>
+        <li>
+          <i class="small material-icons icones">query_builder</i> <!-- Estilização com Materialize. -->
+          <span id ="tempo-digitacao">10</span> segundos <!-- Aqui entra o timer descrescente. -->
+        </li>
+    </ul>
 
-  <!-- Textarea. -->
-  <textarea class="campo-digitacao" rows="8" cols ="40"></textarea><br><br>
-  <!-- Botão de restart. -->
-  <button id="botao-reiniciar">Reiniciar Jogo</button>
+    <!-- Textarea. -->
+    <textarea class="campo-digitacao" rows="8" cols ="40"></textarea><br><br>
 
-  <!-- Contadores interativos. -->
-  <ul>
-    <li><span id="contador-caracteres">0</span> caracteres</li>
-    <li><span id="contador-palavras">0</span> palavras</li>
-  </ul>
+    <div class="botoes">
+      <!-- Botão de restart. -->
+      <a id="botao-reiniciar" class="btn-floating btn-large waves-effect waves-light red">
+        <i class="material-icons">restore</i>
+      </a>
+    </div>
+
+    <!-- Contadores interativos. -->
+    <ul>
+      <li><span id="contador-caracteres">0</span> caracteres</li>
+      <li><span id="contador-palavras">0</span> palavras</li>
+    </ul>
+  </div>
 
   <!-- Imports. -->
   <script src="js/jquery.js"></script>

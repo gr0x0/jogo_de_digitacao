@@ -53,6 +53,7 @@ function inicializaCronometro() {
         if (tempoRestante < 1){
             campo.attr("disabled", true); // Se acabar o tempo, desabilita o textarea.
             clearInterval(timerID); // Zera o timer.
+            campo.toggleClass("campo-desativado"); // Pinta o fundo da textarea de cinza via classe do CSS.
           }
 
       },1000);
@@ -68,4 +69,5 @@ function reiniciaJogo(){
     $("#contador-caracteres").text("0"); // Zerando o contador de letras.
     $("#tempo-digitacao").text(tempoInicial); // Reiniciando o timer.
     inicializaCronometro();
+    campo.toggleClass("campo-desativado"); // Pinta o fundo da textarea de branco via classe do CSS.
 }
