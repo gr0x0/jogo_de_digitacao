@@ -5,15 +5,25 @@
     <title>Estudando jQuery</title>
 </head>
 <body>
-  <h1>Typer Game</h1>
+  <h1>Jogo de Digitação</h1>
   <p class="frase">Lorem ipsum dolor sit am  et, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
+  <!-- Informações retornadas a partir do texto. -->
   <ul class="informacoes">
       <li><span id ="tamanho-frase"></span> palavras</li> <!-- Aqui entra o tamanho da frase. -->
       <li>10 segundos</li>
   </ul>
 
-  <!-- Imports: -->
+  <!-- Textarea. -->
+  <textarea class="campo-digitacao" rows="8" cols ="40"></textarea>
+
+  <!-- Contadores interativos. -->
+  <ul>
+    <li><span id="contador-caracteres">0</span> caracteres</li>
+    <li><span id="contador-palavras">0</span> palavras</li>
+  </ul>
+
+  <!-- Imports. -->
   <script src="js/jquery.js"></script>
   <script src="js/main.js"></script>
 
