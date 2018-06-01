@@ -15,6 +15,7 @@ $(function() // Importante fazer isso, declarando as funções para que funcione
     /* Os eventos de click, blur(evento de sair de um campo), dblclick (clique duplo), por serem tão comuns, têm funções próprias
     no jQuery. Elas evitam que precisemos usar a função on(), permitindo que invoquemos diretamente seus métodos. */
     $("#botao-reiniciar").click(reiniciaJogo);
+    $(".botao-remover").click(removeLinha);
 });;
 
 /*-----------------------------------------------------------------*/
@@ -56,6 +57,7 @@ function inicializaCronometro() {
             campo.attr("disabled", true); // Se acabar o tempo, desabilita o textarea.
             clearInterval(timerID); // Zera o timer.
             campo.toggleClass("campo-desativado"); // Pinta o fundo da textarea de cinza via classe do CSS.
+            inserePlacar();
           }
 
       },1000);
@@ -79,18 +81,58 @@ function reiniciaJogo(){
 
 function inicializaMarcadores() {
     campo.on("input", function() {
-      console.log("Entrei");
         var digitado = campo.val(); // O que já foi digitado.
-        var comparavel = frase.substr(0 , digitado.length); // O pedaço de frase-resposta equivalente ao tamnho do que foi digitado.
+        var comparavel = frase.substr(0 , digitado.length); // O pedaço da frase-resposta do tamanho do que foi digitado.
 
         if(digitado == comparavel) {
-          console.log("Entrei no if");
             campo.addClass("campo-correto"); // Se estiver tudo correto até aí, pinta a borda do textfield de verde.
             campo.removeClass("campo-errado");
         } else {
-          console.log("Entrei no else");
             campo.addClass("campo-errado"); // Se houver erro, pinta a borda do textfield de vermelho.
             campo.removeClass("campo-correto");
         }
     });
+}
+
+function inserePlacar(){
+    var corpoTabela = $(".placar").find("tbody"); // Esse .find() busca o parâmetro recebido dentro de onde é chamado.
+    var usuario = "Default Name";
+    var numPalavras = $("#contador-palavras").text();
+    var botaoRemover = "<a href='#'><i class='small material-icons'>delete</i></a>" ;
+
+    var linha = novaLinha(usuario,numPalavras);
+    linha.find(".botao-remover").click(removeLinha);
+    corpoTabela.prepend(linha); // A prepend() adiciona no início da tabela o novo elemento, ao contrário do append().
+}
+
+function novaLinha(usuario,palavras){
+    /* Assim se cria um elemento HTML com jQuery, usando-se $("<nome da tag>") */
+    var linha = $("<tr>"); // Criando a linha.
+    var colunaUsuario = $("<td>").text(usuario); // Criando o elemento usuário a ser inserido na linha.
+    var colunaPalavras = $("<td>").text(palavras); // Criando o elemento nr de palavras a ser inserido na linha.
+    var colunaRemover = $("<td>"); // Criando o botão a ser inserido na linha.
+
+    var link = $("<a>").attr("href","#").addClass("botao-remover");
+    var icone = $("<i>").addClass("small").addClass("material-icons").text("delete");
+
+    // Icone dentro do <a>
+    link.append(icone);
+
+    // <a> dentro do <td> botão
+    colunaRemover.append(link);
+
+    // Os três <td> dentro do <tr>
+    linha.append(colunaUsuario);
+    linha.append(colunaPalavras);
+    linha.append(colunaRemover);
+
+    return linha;
+}
+
+function removeLinha(event){
+  console.log("entrei");
+    event.preventDefault(); // Impede que o scroll pule para o topo da página após o click no botão.
+    /* Estamos tentando usar funções javascript num elemento html. Para funcionar, usamos o '$'. Além disso, se não inserirmos
+        o parent(), iremos deletar apenas o botão de delete e não a linha inteira, que é o pai do elemento botão. */
+    $(this).parent().parent().remove();
 }
